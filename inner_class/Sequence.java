@@ -32,7 +32,7 @@ public class Sequence {
 
         @Override
         public Object current() {
-            return return items[i];
+            return items[i];
         }
 
         @Override
