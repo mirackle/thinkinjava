@@ -41,6 +41,10 @@ public class Sequence {
                 i++;
             }
         }
+
+        public Sequence outer() {
+            return Sequence.this;
+        }
     }
 
     public Selector selector() {
@@ -60,5 +64,9 @@ public class Sequence {
             System.out.print(selector.current() + " ");
             selector.next();
         }
+        System.out.println();
+
+        System.out.println("======== For Exercise4 =========");
+        System.out.println(((SequenceSelector)selector).outer() == sequence);
     }
 }
