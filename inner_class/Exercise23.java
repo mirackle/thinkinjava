@@ -1,15 +1,29 @@
-java.util.ArrayList;
-java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Exercise23 {
 
     public static void main(String[] args) {
-        printU(new Medlinker().structer());
+        printU(new Medlinker("medical-linker").structer());
+
+        System.out.println("---------------------------");
+
+        MedicalBusiness mb = new MedicalBusiness();
+        Medlinker[] mArray = new Medlinker[] { new Medlinker("lipede"), 
+                                               new Medlinker("yubaoming"), 
+                                               new Medlinker("gujunyu"),
+                                               new Medlinker("wangshiry") };
+
+        for (Medlinker m : mArray) {
+            mb.storeU(m.structer());
+        }
+
+        mb.reCallAll();
     }
 
     public static void printU(U u) {
         System.out.println("ceo: " + u.ceo());     
-        System.out.println("vp: " + u.vp()); 
+        System.out.println("vp: " + u.hostName()); 
         System.out.println("pm: " + u.pm());
     }
 }
@@ -18,12 +32,22 @@ interface U {
 
     String ceo();
 
-    String vp();
-
+    String hostName();
+    
     String pm();
 }
 
 class Medlinker {
+    
+    String hostName;
+    
+    Medlinker(String hostName) {
+        this.hostName = hostName;
+    }
+
+    String getHostName() {
+        return this.hostName;
+    }
     
     U structer() {
         return new U() {
@@ -34,8 +58,8 @@ class Medlinker {
             }
             
             @Override
-            public String vp() {
-                return "预报名";
+            public String hostName() {
+                return Medlinker.this.getHostName();
             }
 
             @Override
@@ -56,5 +80,11 @@ class MedicalBusiness {
 
     void storeU(U u) {
         uList.add(u);
+    }
+
+    void reCallAll() {
+        for (U u : uList) {
+            System.out.println("MedlicalBusiness hostName = " + u.hostName());
+        }
     }
 }
